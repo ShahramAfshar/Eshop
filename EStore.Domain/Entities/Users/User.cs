@@ -14,5 +14,6 @@ namespace EStore.Domain.Entities.Users
         public string Email { get; set; }
 
 
+
     }
 }
