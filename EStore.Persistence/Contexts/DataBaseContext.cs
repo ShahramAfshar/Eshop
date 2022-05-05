@@ -1,4 +1,5 @@
-﻿using EStore.Domain.Entities.Users;
+﻿using EStore.Application.Interfaces.Contexts;
+using EStore.Domain.Entities.Users;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace EStore.Persistence.Contexts
 {
-   public class DataBaseContext:DbContext
+   public class DataBaseContext:DbContext,IDataBaseContext
     {
         public DataBaseContext(DbContextOptions options) : base(options)
         {
