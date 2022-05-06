@@ -1,5 +1,7 @@
-﻿using EStore.Application.Services.Users.Queries.GetUsers;
+﻿using EStore.Application.Services.Users.Queries.GetRoles;
+using EStore.Application.Services.Users.Queries.GetUsers;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +13,12 @@ namespace EndPoint.Site.Areas.Admin.Controllers
     public class UsersController : Controller
     {
         private readonly IGetUsersService _getUsersService;
+        private readonly IGetRolesService _getRolesService ;
 
-        public UsersController(IGetUsersService getUsersService)
+        public UsersController(IGetUsersService getUsersService, IGetRolesService getRolesService)
         {
             _getUsersService = getUsersService;
+            _getRolesService = getRolesService;
         }
 
         public IActionResult Index(string searchKey , int page=1)
@@ -27,6 +31,7 @@ namespace EndPoint.Site.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            ViewBag.Roles = new SelectList(_getRolesService.Execute().Data,"Id","Name");
             return View();
         }
     }

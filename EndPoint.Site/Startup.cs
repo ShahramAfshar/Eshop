@@ -1,4 +1,6 @@
 using EStore.Application.Interfaces.Contexts;
+using EStore.Application.Services.Users.Commands.RegisterUser;
+using EStore.Application.Services.Users.Queries.GetRoles;
 using EStore.Application.Services.Users.Queries.GetUsers;
 using EStore.Persistence.Contexts;
 using Microsoft.AspNetCore.Builder;
@@ -28,8 +30,10 @@ namespace EndPoint.Site
         {           
             services.AddScoped<IDataBaseContext, DataBaseContext>();
             services.AddScoped<IGetUsersService, GetUsersService>();
+            services.AddScoped<IRegisterUserService, RegisterUserService>();
+            services.AddScoped<IGetRolesService, GetRolesService>();
 
-
+            
             string connectionString = @"Data Source=SHAHRAM-PC\SQLEXPRESS ; Initial Catalog= bugetoShop; Integrated Security=True";
             services.AddEntityFrameworkSqlServer().AddDbContext<DataBaseContext>(options=>options.UseSqlServer(connectionString));
             services.AddControllersWithViews();
