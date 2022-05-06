@@ -1,4 +1,5 @@
 using EStore.Application.Interfaces.Contexts;
+using EStore.Application.Services.Users.Queries.GetUsers;
 using EStore.Persistence.Contexts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -24,8 +25,11 @@ namespace EndPoint.Site
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {
+        {           
             services.AddScoped<IDataBaseContext, DataBaseContext>();
+            services.AddScoped<IGetUsersService, GetUsersService>();
+
+
             string connectionString = @"Data Source=SHAHRAM-PC\SQLEXPRESS ; Initial Catalog= bugetoShop; Integrated Security=True";
             services.AddEntityFrameworkSqlServer().AddDbContext<DataBaseContext>(options=>options.UseSqlServer(connectionString));
             services.AddControllersWithViews();
