@@ -15,6 +15,71 @@ namespace EStore.Application.Services.Users.Commands.RegisterUser
         }
         public ResultDto<ResultRegisterUserDTO> Execute(RequestRegisterUserDTO request)
         {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(request.Email))
+                {
+                    return new ResultDto<ResultRegisterUserDTO>() 
+                    {
+                     Data=new ResultRegisterUserDTO()
+                     {
+                         UserId=0
+                     },
+                     IsSuccess=false,
+                     Message="پست الکترونیکی را وارد کنید"
+
+                    };
+
+                }
+
+                if (string.IsNullOrWhiteSpace(request.FullName))
+                {
+                    return new ResultDto<ResultRegisterUserDTO>()
+                    {
+                        Data = new ResultRegisterUserDTO()
+                        {
+                            UserId = 0
+                        },
+                        IsSuccess = false,
+                        Message = "نام کاربری را وارد کنید"
+
+                    };
+
+                }
+
+                if (string.IsNullOrWhiteSpace(request.Password))
+                {
+                    return new ResultDto<ResultRegisterUserDTO>()
+                    {
+                        Data = new ResultRegisterUserDTO()
+                        {
+                            UserId = 0
+                        },
+                        IsSuccess = false,
+                        Message = "کلمه عبور را وارد کنید"
+
+                    };
+
+                }
+
+                if (request.Password != request.RePassword)
+                {
+                    return new ResultDto<ResultRegisterUserDTO>()
+                    {
+                        Data = new ResultRegisterUserDTO()
+                        {
+                            UserId = 0
+                        },
+                        IsSuccess = false,
+                        Message = "کلمه عبور و تکرار ان یکسان نیست"
+
+                    };
+
+                }
+
+            
+
+
             User user = new User() { 
             Email=request.Email,
             FullName=request.FullName
@@ -42,6 +107,24 @@ namespace EStore.Application.Services.Users.Commands.RegisterUser
             IsSuccess=true,
             Message="ثبت نام انجام شد"
             };
+
+
+            }
+
+            catch (System.Exception)
+            {
+                return new ResultDto<ResultRegisterUserDTO>()
+                {
+                    Data = new ResultRegisterUserDTO()
+                    {
+                        UserId = 0
+                    },
+                    IsSuccess = false,
+                    Message = "ثبت نام انجام نشد"
+
+                };
+            }
+
 
         }
     }
