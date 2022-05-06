@@ -7,7 +7,7 @@ namespace EStore.Application.Services.Users.Queries.GetUsers
 {
     public interface IGetUsersService
     {
-        List<GetUsersDTO> Execute(RequstGetUserDTO requstGetUserDTO); 
+        ResultGetUsersDTO Execute(RequstGetUserDTO requstGetUserDTO); 
 
     }
 }

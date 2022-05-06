@@ -13,8 +13,4 @@
     <ProjectReference Include="..\EStore.Domain\EStore.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Services\Users\Commands\" />
-  </ItemGroup>
-
 </Project>

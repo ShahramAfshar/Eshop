@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace EndPoint.Site.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class UsersController : Controller
     {
         private readonly IGetUsersService _getUsersService;
@@ -16,7 +17,15 @@ namespace EndPoint.Site.Areas.Admin.Controllers
             _getUsersService = getUsersService;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string searchKey , int page=1)
+        {
+            return View(_getUsersService.Execute( new RequstGetUserDTO() { 
+            Page=page,SearchKey=searchKey
+            }));
+        }
+
+        [HttpGet]
+        public IActionResult Create()
         {
             return View();
         }
