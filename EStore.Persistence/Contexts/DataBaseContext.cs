@@ -22,6 +22,10 @@ namespace EStore.Persistence.Contexts
             modelBuilder.Entity<Role>().HasData(new Role() { Id = 1, Name = nameof(UserRoles.Admin) });
             modelBuilder.Entity<Role>().HasData(new Role() { Id = 2, Name = nameof(UserRoles.Operator) });
             modelBuilder.Entity<Role>().HasData(new Role() { Id = 3, Name = nameof(UserRoles.Customer) });
+
+            //اعمال ایندکس و اعمال عدم تکراری
+            modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();
+        
         }
 
         public virtual DbSet<User> Users { get; set; }
