@@ -1,4 +1,5 @@
 ﻿using EStore.Application.Interfaces.Contexts;
+using EStore.Common;
 using EStore.Common.Dto;
 using EStore.Domain.Entities.Users;
 using System.Collections.Generic;
@@ -78,13 +79,13 @@ namespace EStore.Application.Services.Users.Commands.RegisterUser
                 }
 
 
-                //var passwordHasher = new PasswordHasher();
-                //var hashPassword=
+                var passwordHasher = new PasswordHasher();
+                var hashPassword = passwordHasher.HashPassword(request.Password);
 
             User user = new User() { 
             Email=request.Email,
             FullName=request.FullName,
-            Password=request.Password,
+            Password=hashPassword,
             IsActive=true
             };
 

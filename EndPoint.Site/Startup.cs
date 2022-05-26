@@ -1,4 +1,4 @@
-using EStore.Application.Interfaces.Contexts;
+﻿using EStore.Application.Interfaces.Contexts;
 using EStore.Application.Services.Users.Commands.EditUser;
 using EStore.Application.Services.Users.Commands.RegisterUser;
 using EStore.Application.Services.Users.Commands.RemoveUser;
@@ -6,8 +6,10 @@ using EStore.Application.Services.Users.Commands.UserStatusChange;
 using EStore.Application.Services.Users.Queries.GetRoles;
 using EStore.Application.Services.Users.Queries.GetUsers;
 using EStore.Persistence.Contexts;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -30,7 +32,19 @@ namespace EndPoint.Site
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {           
+        {
+            //برای انجام Authentication بر اساس کوکی
+            services.AddAuthentication(options =>
+            {
+                options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            }).AddCookie(options =>
+            {
+                options.LoginPath = new PathString("/");
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(5.0);
+            });
+
             services.AddScoped<IDataBaseContext, DataBaseContext>();
             services.AddScoped<IGetUsersService, GetUsersService>();
             services.AddScoped<IRegisterUserService, RegisterUserService>();
@@ -38,6 +52,7 @@ namespace EndPoint.Site
             services.AddScoped<IRemoveUserService, RemoveUserService>();
             services.AddScoped<IUserStatusChangeService,UserStatusChangeService>();
             services.AddScoped<IEditUserService, EditUserService>();
+            services.AddScoped<IRegisterUserService, RegisterUserService>();
             
 
 
@@ -62,6 +77,7 @@ namespace EndPoint.Site
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {
