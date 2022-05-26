@@ -1,5 +1,8 @@
 using EStore.Application.Interfaces.Contexts;
+using EStore.Application.Services.Users.Commands.EditUser;
 using EStore.Application.Services.Users.Commands.RegisterUser;
+using EStore.Application.Services.Users.Commands.RemoveUser;
+using EStore.Application.Services.Users.Commands.UserStatusChange;
 using EStore.Application.Services.Users.Queries.GetRoles;
 using EStore.Application.Services.Users.Queries.GetUsers;
 using EStore.Persistence.Contexts;
@@ -32,8 +35,12 @@ namespace EndPoint.Site
             services.AddScoped<IGetUsersService, GetUsersService>();
             services.AddScoped<IRegisterUserService, RegisterUserService>();
             services.AddScoped<IGetRolesService, GetRolesService>();
-
+            services.AddScoped<IRemoveUserService, RemoveUserService>();
+            services.AddScoped<IUserStatusChangeService,UserStatusChangeService>();
+            services.AddScoped<IEditUserService, EditUserService>();
             
+
+
             string connectionString = @"Data Source=SHAHRAM-PC\SQLEXPRESS ; Initial Catalog= bugetoShop; Integrated Security=True";
             services.AddEntityFrameworkSqlServer().AddDbContext<DataBaseContext>(options=>options.UseSqlServer(connectionString));
             services.AddControllersWithViews();

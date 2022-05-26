@@ -25,7 +25,8 @@ namespace EStore.Application.Services.Users.Queries.GetUsers
             {
                 Id = u.Id,
                 Email = u.Email,
-                FullName = u.FullName
+                FullName = u.FullName,
+                IsActive=u.IsActive
             }).ToList();
 
             return new ResultGetUsersDTO()

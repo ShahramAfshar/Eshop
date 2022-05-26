@@ -25,6 +25,9 @@ namespace EStore.Persistence.Contexts
 
             //اعمال ایندکس و اعمال عدم تکراری
             modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();
+
+            //فقط کاربری رو بارگذاری کن که فیلد فعال باشند
+            modelBuilder.Entity<User>().HasQueryFilter(u=>!u.IsRemove);
         
         }
 

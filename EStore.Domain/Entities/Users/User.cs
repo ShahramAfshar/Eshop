@@ -12,6 +12,7 @@ namespace EStore.Domain.Entities.Users
         public string  FullName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+        public bool IsActive { get; set; }
 
         public virtual ICollection<UserInRole> UserInRoles { get; set; }
 
