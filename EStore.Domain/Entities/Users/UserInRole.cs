@@ -1,6 +1,8 @@
-﻿namespace EStore.Domain.Entities.Users
+﻿using EStore.Domain.Entities.Commons;
+
+namespace EStore.Domain.Entities.Users
 {
-    public class UserInRole
+    public class UserInRole:BaseEntity
     {
         public int Id { get; set; }
 

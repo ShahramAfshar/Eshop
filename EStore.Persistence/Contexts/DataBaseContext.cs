@@ -1,5 +1,6 @@
 ﻿using EStore.Application.Interfaces.Contexts;
 using EStore.Common.UserRoles;
+using EStore.Domain.Entities.Products;
 using EStore.Domain.Entities.Users;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -19,21 +20,39 @@ namespace EStore.Persistence.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            SeedData(modelBuilder);
+            
+            //اعمال ایندکس و اعمال عدم تکراری
+            modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();
+
+            ApplyQueryFilter(modelBuilder);
+
+
+        
+        }
+
+        private void ApplyQueryFilter(ModelBuilder modelBuilder)
+        {
+            //فقط کاربری رو بارگذاری کن که فیلد فعال باشند
+            modelBuilder.Entity<User>().HasQueryFilter(u => !u.IsRemove);
+            modelBuilder.Entity<Role>().HasQueryFilter(r => !r.IsRemove);
+            modelBuilder.Entity<UserInRole>().HasQueryFilter(ur => !ur.IsRemove);
+            modelBuilder.Entity<Category>().HasQueryFilter(c => !c.IsRemove);
+        }
+
+        private void SeedData(ModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<Role>().HasData(new Role() { Id = 1, Name = nameof(UserRoles.Admin) });
             modelBuilder.Entity<Role>().HasData(new Role() { Id = 2, Name = nameof(UserRoles.Operator) });
             modelBuilder.Entity<Role>().HasData(new Role() { Id = 3, Name = nameof(UserRoles.Customer) });
 
-            //اعمال ایندکس و اعمال عدم تکراری
-            modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();
-
-            //فقط کاربری رو بارگذاری کن که فیلد فعال باشند
-            modelBuilder.Entity<User>().HasQueryFilter(u=>!u.IsRemove);
-        
         }
 
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<UserInRole> UserInRoles { get; set; }
+        public virtual DbSet<Category>  Categories { get; set; }
 
     }
 }

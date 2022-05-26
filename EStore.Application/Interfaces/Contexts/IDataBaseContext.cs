@@ -1,4 +1,5 @@
-﻿using EStore.Domain.Entities.Users;
+﻿using EStore.Domain.Entities.Products;
+using EStore.Domain.Entities.Users;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace EStore.Application.Interfaces.Contexts
          DbSet<User> Users { get; set; }
          DbSet<Role> Roles { get; set; }
          DbSet<UserInRole> UserInRoles { get; set; }
+         DbSet<Category> Categories { get; set; }
 
         int SaveChanges(bool acceptAllChangesOnSuccess);
         int SaveChanges();

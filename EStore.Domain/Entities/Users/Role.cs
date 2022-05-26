@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using EStore.Domain.Entities.Commons;
+using System.Collections.Generic;
 
 namespace EStore.Domain.Entities.Users
 {
-    public class Role
+    public class Role : BaseEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }
