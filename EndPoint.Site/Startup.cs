@@ -1,5 +1,6 @@
 ﻿using EStore.Application.Interfaces.Contexts;
 using EStore.Application.Services.Users.Commands.EditUser;
+using EStore.Application.Services.Users.Commands.LoginUser;
 using EStore.Application.Services.Users.Commands.RegisterUser;
 using EStore.Application.Services.Users.Commands.RemoveUser;
 using EStore.Application.Services.Users.Commands.UserStatusChange;
@@ -53,6 +54,7 @@ namespace EndPoint.Site
             services.AddScoped<IUserStatusChangeService,UserStatusChangeService>();
             services.AddScoped<IEditUserService, EditUserService>();
             services.AddScoped<IRegisterUserService, RegisterUserService>();
+            services.AddScoped<ILoginUserService, LoginUserService>();
             
 
 
