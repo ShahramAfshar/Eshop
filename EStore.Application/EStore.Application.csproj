@@ -13,4 +13,10 @@
     <ProjectReference Include="..\EStore.Domain\EStore.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\Products\Commands\" />
+    <Folder Include="Services\Products\FacadPatern\" />
+    <Folder Include="Services\Products\Queries\" />
+  </ItemGroup>
+
 </Project>
