@@ -77,12 +77,15 @@ namespace EStore.Application.Services.Users.Commands.RegisterUser
 
                 }
 
-            
 
+                //var passwordHasher = new PasswordHasher();
+                //var hashPassword=
 
             User user = new User() { 
             Email=request.Email,
-            FullName=request.FullName
+            FullName=request.FullName,
+            Password=request.Password,
+            IsActive=true
             };
 
             List<UserInRole> userInRole = new List<UserInRole>();
