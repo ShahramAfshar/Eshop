@@ -34,8 +34,8 @@ namespace EStore.Application.Services.Products.FacadPatern
             }
         }
 
-        private IGetCategoriesService _getCategoriesService;
-        public IGetCategoriesService GetCategoriesService
+        private GetCategoriesService _getCategoriesService;
+        public GetCategoriesService GetCategoriesService
         {
             get
             {
@@ -53,8 +53,8 @@ namespace EStore.Application.Services.Products.FacadPatern
             }
         }
 
-        private IGetAllCategoriesService _getAllCategoriesService;
-        public IGetAllCategoriesService GetAllCategoriesService
+        private GetAllCategoriesService _getAllCategoriesService;
+        public GetAllCategoriesService GetAllCategoriesService
         {
             get
             {

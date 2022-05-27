@@ -13,10 +13,10 @@ namespace EStore.Application.Interfaces.FacadPatern
     public interface IProductFasad
     {
         AddNewCategorService AddNewCategorService { get; }
-        IGetCategoriesService GetCategoriesService { get; }
+        GetCategoriesService GetCategoriesService { get; }
 
         AddNewProductService AddNewProductService { get; }
 
-        IGetAllCategoriesService GetAllCategoriesService { get; }
+        GetAllCategoriesService GetAllCategoriesService { get; }
     }
 }
