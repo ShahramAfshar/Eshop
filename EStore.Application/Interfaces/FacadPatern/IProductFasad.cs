@@ -1,4 +1,6 @@
 ﻿using EStore.Application.Services.Products.Commands.AddNewCategory;
+using EStore.Application.Services.Products.Commands.AddNewProduct;
+using EStore.Application.Services.Products.Queries.GetAllCategories;
 using EStore.Application.Services.Products.Queries.GetCategories;
 using System;
 using System.Collections.Generic;
@@ -11,6 +13,10 @@ namespace EStore.Application.Interfaces.FacadPatern
     public interface IProductFasad
     {
         AddNewCategorService AddNewCategorService { get; }
-        GetCategoriesService GetCategoriesService { get; }
+        IGetCategoriesService GetCategoriesService { get; }
+
+        AddNewProductService AddNewProductService { get; }
+
+        IGetAllCategoriesService GetAllCategoriesService { get; }
     }
 }

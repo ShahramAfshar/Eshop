@@ -41,8 +41,6 @@ namespace EStore.Application.Services.Products.Queries.GetCategories
             
             };
 
-
-            throw new NotImplementedException();
         }
     }
 }

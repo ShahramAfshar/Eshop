@@ -17,6 +17,9 @@ namespace EStore.Application.Interfaces.Contexts
          DbSet<Role> Roles { get; set; }
          DbSet<UserInRole> UserInRoles { get; set; }
          DbSet<Category> Categories { get; set; }
+         DbSet<Product> Products { get; set; }
+         DbSet<ProductFeature> ProductFeatures { get; set; }
+         DbSet<ProductImage> ProductImages { get; set; }
 
         int SaveChanges(bool acceptAllChangesOnSuccess);
         int SaveChanges();

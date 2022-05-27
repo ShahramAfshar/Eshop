@@ -23,7 +23,7 @@ namespace EStore.Application.Services.Products.Commands.AddNewCategory
                 };
             }
 
-            var category = new Category()
+            Category category = new Category()
             {
                 Name = name,
                 ParentCategory= GetParentCategory(parentId),
@@ -41,9 +41,9 @@ namespace EStore.Application.Services.Products.Commands.AddNewCategory
 
         }
 
-        private Category GetParentCategory(int? id)
+        private Category GetParentCategory(int? parentId)
         {
-            return _context.Categories.Find(id);
+            return _context.Categories.Find(parentId);
         }
     }
 
