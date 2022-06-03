@@ -1,4 +1,5 @@
-﻿using EStore.Domain.Entities.Products;
+﻿using EStore.Domain.Entities.HomePages;
+using EStore.Domain.Entities.Products;
 using EStore.Domain.Entities.Users;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -20,6 +21,7 @@ namespace EStore.Application.Interfaces.Contexts
          DbSet<Product> Products { get; set; }
          DbSet<ProductFeature> ProductFeatures { get; set; }
          DbSet<ProductImage> ProductImages { get; set; }
+         DbSet<Slider> Sliders { get; set; }
 
         int SaveChanges(bool acceptAllChangesOnSuccess);
         int SaveChanges();

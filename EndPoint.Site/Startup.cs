@@ -2,6 +2,8 @@
 using EStore.Application.Interfaces.FacadPatern;
 using EStore.Application.Services.Common.Queries.GetCategory;
 using EStore.Application.Services.Common.Queries.GetMenuItem;
+using EStore.Application.Services.HomePages.Commands.AddNewSlider;
+using EStore.Application.Services.HomePages.Queries.GetSlider;
 using EStore.Application.Services.Products.FacadPatern;
 using EStore.Application.Services.Users.Commands.EditUser;
 using EStore.Application.Services.Users.Commands.LoginUser;
@@ -65,7 +67,9 @@ namespace EndPoint.Site
 
             services.AddScoped<IGetMenuItemService,GetMenuItemService>();
             services.AddScoped<IGetCategoryService, GetCategoryService>();
-
+            services.AddScoped<IAddNewSliderSevice, AddNewSliderSevice>();
+            services.AddScoped<IGetSliderService, GetSliderService>();
+            
 
             string connectionString = @"Data Source=SHAHRAM-PC\SQLEXPRESS ; Initial Catalog= bugetoShop; Integrated Security=True";
             services.AddEntityFrameworkSqlServer().AddDbContext<DataBaseContext>(options=>options.UseSqlServer(connectionString));

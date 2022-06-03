@@ -1,5 +1,6 @@
 ﻿using EStore.Application.Interfaces.Contexts;
 using EStore.Common.UserRoles;
+using EStore.Domain.Entities.HomePages;
 using EStore.Domain.Entities.Products;
 using EStore.Domain.Entities.Users;
 using Microsoft.EntityFrameworkCore;
@@ -25,6 +26,8 @@ namespace EStore.Persistence.Contexts
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ProductFeature> ProductFeatures { get; set; }
         public virtual DbSet<ProductImage> ProductImages { get; set; }
+        public virtual DbSet<Slider> Sliders { get; set; }
+        
 
 
 
@@ -49,6 +52,10 @@ namespace EStore.Persistence.Contexts
             modelBuilder.Entity<Role>().HasQueryFilter(r => !r.IsRemove);
             modelBuilder.Entity<UserInRole>().HasQueryFilter(ur => !ur.IsRemove);
             modelBuilder.Entity<Category>().HasQueryFilter(c => !c.IsRemove);
+            modelBuilder.Entity<Slider>().HasQueryFilter(c => !c.IsRemove);
+            modelBuilder.Entity<Product>().HasQueryFilter(c => !c.IsRemove);
+            modelBuilder.Entity<ProductFeature>().HasQueryFilter(c => !c.IsRemove);
+            modelBuilder.Entity<ProductImage>().HasQueryFilter(c => !c.IsRemove);
         }
 
         private void SeedData(ModelBuilder modelBuilder)
