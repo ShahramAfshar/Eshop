@@ -15,6 +15,7 @@ namespace EStore.Domain.Entities.Products
         public int Price { get; set; }
         public int Inventory { get; set; }
         public bool IsDisplay { get; set; }
+        public int ViewCount { get; set; }
 
         //Relation one-many 
         public  virtual Category Category  { get; set; }

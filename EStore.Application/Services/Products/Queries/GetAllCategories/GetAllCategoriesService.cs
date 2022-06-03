@@ -19,7 +19,7 @@ namespace EStore.Application.Services.Products.Queries.GetAllCategories
         {
             var categories = _context.Categories
                 .Include(c => c.ParentCategory)
-                .Where(c => c.ParentCaregoryId != null)
+                .Where(c => c.ParentCategoryId != null)
                 .ToList()
                 .Select(c => new AllCategoriesDto()
                 {

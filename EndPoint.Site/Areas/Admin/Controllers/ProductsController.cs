@@ -31,7 +31,7 @@ namespace EndPoint.Site.Areas.Admin.Controllers
         public IActionResult AddNewProduct(RequstAddNewProductDto requst,List<AddNewProductFeature> features)
         {
             List<IFormFile> images = new List<IFormFile>();
-            for (int i = 0; i < Request.Form.Count; i++)
+            for (int i = 0; i < Request.Form.Files.Count; i++)
             {
                 var file = Request.Form.Files[i];
                 images.Add(file);
@@ -42,9 +42,16 @@ namespace EndPoint.Site.Areas.Admin.Controllers
             return Json(_productFasad.AddNewProductService.Execute(requst));
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int page=1,int pageSize=20)
         {
-            return View();
+            return View(_productFasad.GetProductForAdminService.Execute(page,pageSize).Data);
+        }
+
+        [HttpGet]
+        public IActionResult Detail(int id)
+        {
+            var product = _productFasad.GetProductDetailForAdminService.Execute(id).Data;
+            return View(product);
         }
     }
 }

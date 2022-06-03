@@ -1,5 +1,7 @@
 ﻿using EStore.Application.Interfaces.Contexts;
 using EStore.Application.Interfaces.FacadPatern;
+using EStore.Application.Services.Common.Queries.GetCategory;
+using EStore.Application.Services.Common.Queries.GetMenuItem;
 using EStore.Application.Services.Products.FacadPatern;
 using EStore.Application.Services.Users.Commands.EditUser;
 using EStore.Application.Services.Users.Commands.LoginUser;
@@ -61,6 +63,8 @@ namespace EndPoint.Site
             //FACAD Injection            
             services.AddScoped<IProductFasad, ProductFasad>();
 
+            services.AddScoped<IGetMenuItemService,GetMenuItemService>();
+            services.AddScoped<IGetCategoryService, GetCategoryService>();
 
 
             string connectionString = @"Data Source=SHAHRAM-PC\SQLEXPRESS ; Initial Catalog= bugetoShop; Integrated Security=True";

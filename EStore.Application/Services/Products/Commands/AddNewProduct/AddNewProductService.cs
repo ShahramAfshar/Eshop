@@ -89,7 +89,6 @@ namespace EStore.Application.Services.Products.Commands.AddNewProduct
             }
 
 
-            return null;
         }
 
 

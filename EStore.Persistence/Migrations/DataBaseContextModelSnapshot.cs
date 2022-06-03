@@ -35,9 +35,6 @@ namespace EStore.Persistence.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ParentCaregoryId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("ParentCategoryId")
                         .HasColumnType("int");
 
@@ -93,6 +90,9 @@ namespace EStore.Persistence.Migrations
 
                     b.Property<DateTime?>("UpdateTime")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("ViewCount")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -198,7 +198,7 @@ namespace EStore.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            InsertTime = new DateTime(2022, 5, 27, 11, 52, 34, 854, DateTimeKind.Local).AddTicks(7894),
+                            InsertTime = new DateTime(2022, 6, 3, 16, 54, 12, 640, DateTimeKind.Local).AddTicks(4984),
                             IsRemove = false,
                             Name = "Admin",
                             RemoveTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -206,7 +206,7 @@ namespace EStore.Persistence.Migrations
                         new
                         {
                             Id = 2,
-                            InsertTime = new DateTime(2022, 5, 27, 11, 52, 34, 881, DateTimeKind.Local).AddTicks(8349),
+                            InsertTime = new DateTime(2022, 6, 3, 16, 54, 12, 662, DateTimeKind.Local).AddTicks(3659),
                             IsRemove = false,
                             Name = "Operator",
                             RemoveTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -214,7 +214,7 @@ namespace EStore.Persistence.Migrations
                         new
                         {
                             Id = 3,
-                            InsertTime = new DateTime(2022, 5, 27, 11, 52, 34, 882, DateTimeKind.Local).AddTicks(26),
+                            InsertTime = new DateTime(2022, 6, 3, 16, 54, 12, 662, DateTimeKind.Local).AddTicks(4649),
                             IsRemove = false,
                             Name = "Customer",
                             RemoveTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)

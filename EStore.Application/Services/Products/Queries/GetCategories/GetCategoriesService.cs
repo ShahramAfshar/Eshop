@@ -23,7 +23,7 @@ namespace EStore.Application.Services.Products.Queries.GetCategories
             var categories = _context.Categories
                 .Include(c => c.ParentCategory)
                 .Include(c => c.SubCategory)
-                .Where(c => c.ParentCaregoryId == parentId)
+                .Where(c => c.ParentCategoryId == parentId)
                 .ToList()
                 .Select(c => new CategoriesDto()
                 {
