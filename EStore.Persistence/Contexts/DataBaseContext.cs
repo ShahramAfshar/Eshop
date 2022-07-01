@@ -1,5 +1,6 @@
 ﻿using EStore.Application.Interfaces.Contexts;
 using EStore.Common.UserRoles;
+using EStore.Domain.Entities.Carts;
 using EStore.Domain.Entities.HomePages;
 using EStore.Domain.Entities.Products;
 using EStore.Domain.Entities.Users;
@@ -19,15 +20,18 @@ namespace EStore.Persistence.Contexts
 
         }
 
-        public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<ProductFeature> ProductFeatures { get; set; }
+       public virtual DbSet<HomePageImages> HomePageImages { get; set; }
+        public virtual DbSet<ProductImage> ProductImages { get; set; }
         public virtual DbSet<UserInRole> UserInRoles { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<CartItem> CartItems { get; set; }
         public virtual DbSet<Product> Products { get; set; }
-        public virtual DbSet<ProductFeature> ProductFeatures { get; set; }
-        public virtual DbSet<ProductImage> ProductImages { get; set; }
         public virtual DbSet<Slider> Sliders { get; set; }
-        
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<Cart> Carts { get; set; }
+
 
 
 
@@ -48,14 +52,17 @@ namespace EStore.Persistence.Contexts
         private void ApplyQueryFilter(ModelBuilder modelBuilder)
         {
             //فقط کاربری رو بارگذاری کن که فیلد فعال باشند
+            modelBuilder.Entity<ProductFeature>().HasQueryFilter(c => !c.IsRemove);
+            modelBuilder.Entity<HomePageImages>().HasQueryFilter(c => !c.IsRemove);
+            modelBuilder.Entity<UserInRole>().HasQueryFilter(ur => !ur.IsRemove);
+            modelBuilder.Entity<ProductImage>().HasQueryFilter(c => !c.IsRemove);
+            modelBuilder.Entity<Category>().HasQueryFilter(c => !c.IsRemove);
+            modelBuilder.Entity<CartItem>().HasQueryFilter(c => !c.IsRemove);
+            modelBuilder.Entity<Product>().HasQueryFilter(c => !c.IsRemove);
+            modelBuilder.Entity<Slider>().HasQueryFilter(c => !c.IsRemove);
             modelBuilder.Entity<User>().HasQueryFilter(u => !u.IsRemove);
             modelBuilder.Entity<Role>().HasQueryFilter(r => !r.IsRemove);
-            modelBuilder.Entity<UserInRole>().HasQueryFilter(ur => !ur.IsRemove);
-            modelBuilder.Entity<Category>().HasQueryFilter(c => !c.IsRemove);
-            modelBuilder.Entity<Slider>().HasQueryFilter(c => !c.IsRemove);
-            modelBuilder.Entity<Product>().HasQueryFilter(c => !c.IsRemove);
-            modelBuilder.Entity<ProductFeature>().HasQueryFilter(c => !c.IsRemove);
-            modelBuilder.Entity<ProductImage>().HasQueryFilter(c => !c.IsRemove);
+            modelBuilder.Entity<Cart>().HasQueryFilter(c => !c.IsRemove);
         }
 
         private void SeedData(ModelBuilder modelBuilder)

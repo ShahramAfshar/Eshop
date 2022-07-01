@@ -4,87 +4,22 @@ using EStore.Persistence.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EStore.Persistence.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    partial class DataBaseContextModelSnapshot : ModelSnapshot
+    [Migration("20220630122149_addHome")]
+    partial class addHome
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.16")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("EStore.Domain.Entities.Carts.Cart", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<Guid>("BrowserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("InsertTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsRemove")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("RemoveTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("UpdateTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Carts");
-                });
-
-            modelBuilder.Entity("EStore.Domain.Entities.Carts.CartItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Count")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("InsertTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsRemove")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("Price")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("RemoveTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("UpdateTime")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("CartItems");
-                });
 
             modelBuilder.Entity("EStore.Domain.Entities.HomePages.HomePageImages", b =>
                 {
@@ -328,7 +263,7 @@ namespace EStore.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            InsertTime = new DateTime(2022, 6, 30, 23, 56, 26, 195, DateTimeKind.Local).AddTicks(2828),
+                            InsertTime = new DateTime(2022, 6, 30, 16, 51, 44, 674, DateTimeKind.Local).AddTicks(8528),
                             IsRemove = false,
                             Name = "Admin",
                             RemoveTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -336,7 +271,7 @@ namespace EStore.Persistence.Migrations
                         new
                         {
                             Id = 2,
-                            InsertTime = new DateTime(2022, 6, 30, 23, 56, 26, 253, DateTimeKind.Local).AddTicks(1206),
+                            InsertTime = new DateTime(2022, 6, 30, 16, 51, 44, 697, DateTimeKind.Local).AddTicks(6700),
                             IsRemove = false,
                             Name = "Operator",
                             RemoveTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -344,7 +279,7 @@ namespace EStore.Persistence.Migrations
                         new
                         {
                             Id = 3,
-                            InsertTime = new DateTime(2022, 6, 30, 23, 56, 26, 253, DateTimeKind.Local).AddTicks(3139),
+                            InsertTime = new DateTime(2022, 6, 30, 16, 51, 44, 697, DateTimeKind.Local).AddTicks(7963),
                             IsRemove = false,
                             Name = "Customer",
                             RemoveTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -423,26 +358,6 @@ namespace EStore.Persistence.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("UserInRoles");
-                });
-
-            modelBuilder.Entity("EStore.Domain.Entities.Carts.Cart", b =>
-                {
-                    b.HasOne("EStore.Domain.Entities.Users.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("EStore.Domain.Entities.Carts.CartItem", b =>
-                {
-                    b.HasOne("EStore.Domain.Entities.Products.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("EStore.Domain.Entities.Products.Category", b =>

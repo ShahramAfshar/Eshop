@@ -1,4 +1,5 @@
-﻿using EStore.Domain.Entities.HomePages;
+﻿using EStore.Domain.Entities.Carts;
+using EStore.Domain.Entities.HomePages;
 using EStore.Domain.Entities.Products;
 using EStore.Domain.Entities.Users;
 using Microsoft.EntityFrameworkCore;
@@ -21,7 +22,10 @@ namespace EStore.Application.Interfaces.Contexts
          DbSet<Product> Products { get; set; }
          DbSet<ProductFeature> ProductFeatures { get; set; }
          DbSet<ProductImage> ProductImages { get; set; }
+         DbSet<HomePageImages> HomePageImages { get; set; }     
          DbSet<Slider> Sliders { get; set; }
+         DbSet<Cart> Carts { get; set; }
+         DbSet<CartItem>  CartItems { get; set; }
 
         int SaveChanges(bool acceptAllChangesOnSuccess);
         int SaveChanges();
