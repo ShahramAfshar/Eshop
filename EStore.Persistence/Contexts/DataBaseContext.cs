@@ -1,7 +1,9 @@
 ﻿using EStore.Application.Interfaces.Contexts;
 using EStore.Common.UserRoles;
 using EStore.Domain.Entities.Carts;
+using EStore.Domain.Entities.Finance;
 using EStore.Domain.Entities.HomePages;
+using EStore.Domain.Entities.Orders;
 using EStore.Domain.Entities.Products;
 using EStore.Domain.Entities.Users;
 using Microsoft.EntityFrameworkCore;
@@ -31,12 +33,20 @@ namespace EStore.Persistence.Contexts
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Cart> Carts { get; set; }
-
+        public virtual DbSet<RequestPay> RequestPays { get; set; }
+        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
 
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            modelBuilder.Entity<Order>()
+                .HasOne(p => p.User)
+                .WithMany(p => p.Orders)
+                .OnDelete(DeleteBehavior.NoAction);
+
 
             SeedData(modelBuilder);
             
@@ -63,6 +73,9 @@ namespace EStore.Persistence.Contexts
             modelBuilder.Entity<User>().HasQueryFilter(u => !u.IsRemove);
             modelBuilder.Entity<Role>().HasQueryFilter(r => !r.IsRemove);
             modelBuilder.Entity<Cart>().HasQueryFilter(c => !c.IsRemove);
+            modelBuilder.Entity<RequestPay>().HasQueryFilter(c => !c.IsRemove);
+            modelBuilder.Entity<Order>().HasQueryFilter(c => !c.IsRemove);
+            modelBuilder.Entity<OrderDetail>().HasQueryFilter(c => !c.IsRemove);
         }
 
         private void SeedData(ModelBuilder modelBuilder)

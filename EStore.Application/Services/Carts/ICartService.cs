@@ -14,7 +14,10 @@ namespace EStore.Application.Services.Carts
     {
         ResultDto AddToCart(int productId, Guid browserId);
         ResultDto DeleteFromCart(int productId, Guid browserId);
-        ResultDto<CartDto> GetMyCart(Guid browserId);
+        ResultDto<CartDto> GetMyCart(Guid browserId,int? userId);
+        ResultDto Add(int cartItemId);
+        ResultDto LowOff(int cartItemId);
+
 
     }
 
@@ -25,6 +28,19 @@ namespace EStore.Application.Services.Carts
         {
             _context = context;
         }
+
+        public ResultDto Add(int cartItemId)
+        {
+            var cartItem = _context.CartItems.Find(cartItemId);
+            cartItem.Count++;
+            _context.SaveChanges();
+
+            return new ResultDto() { 
+            IsSuccess=true,
+            Message=""
+            };
+        }
+
         public ResultDto AddToCart(int productId, Guid browserId)
         {
             var cart = _context.Carts.Where(c => c.BrowserId == browserId && c.Finished == false).FirstOrDefault();
@@ -97,41 +113,105 @@ namespace EStore.Application.Services.Carts
 
         }
 
-        public ResultDto<CartDto> GetMyCart(Guid browserId)
+        public ResultDto<CartDto> GetMyCart(Guid browserId, int? userId)
         {
             var cart = _context.Carts
                 .Include(c => c.CartItem)
-                                .ThenInclude(c => c.Product)
+                 .ThenInclude(c => c.Product)
+                 .ThenInclude(c=>c.ProductImages)
                 .Where(c => c.BrowserId == browserId && c.Finished == false)
                 .OrderByDescending(c => c.Id)
                 .FirstOrDefault();
 
-            return new ResultDto<CartDto>()
+            if (cart ==null)
             {
-                Data = new CartDto()
+                return new ResultDto<CartDto>() { 
+                Data= new CartDto() { CartItemDtos= new List<CartItemDto>()},
+                IsSuccess=true,
+                Message=""
+                
+                };
+            }
+
+
+            if (userId!= null)
+            {
+                var user = _context.Users.Find(userId);
+                cart.User = user;
+                _context.SaveChanges();
+            }
+
+            if (cart !=null)
+            {
+                return new ResultDto<CartDto>()
                 {
-                    CartItemDtos = cart.CartItem.Select(c => new CartItemDto()
+                    Data = new CartDto()
                     {
-                        Count = c.Count,
-                        Price = c.Price,
-                        ProductName = c.Product.Name
+                        CartId=cart.Id,
+                        ProductCount = cart.CartItem.Count(),
+                        SumAmount = cart.CartItem.Sum(c => c.Price * c.Count),
+                        CartItemDtos = cart.CartItem.Select(c => new CartItemDto()
+                        {
+                            Count = c.Count,
+                            Price = c.Price,
+                            ProductName = c.Product.Name,
+                            Id = c.Id,
+                            Image = c.Product?.ProductImages?.FirstOrDefault()?.SourceImage ?? ""
 
-                    }).ToList()
-                },
+                        }).ToList()
+                    },
+                    IsSuccess = true,
+                    Message = "",
+
+                };
+            }
+
+            else
+            {
+                return new ResultDto<CartDto>() { 
+                Data= new CartDto(),
+                IsSuccess=false,
+                Message=""
+                
+                };
+            }
+        }
+
+        public ResultDto LowOff(int cartItemId)
+        {
+            var cartItem = _context.CartItems.Find(cartItemId);
+            if (cartItem.Count <=1)
+            {
+                return new ResultDto()
+                {
+                    IsSuccess = false,
+                    Message = ""
+                };
+
+            }
+
+            cartItem.Count--;
+            _context.SaveChanges();
+
+            return new ResultDto()
+            {
                 IsSuccess = true,
-                Message = "",
-
+                Message = ""
             };
-
         }
     }
     public class CartDto
     {
+        public int CartId { get; set; }
+        public int SumAmount { get; set; }
+        public int ProductCount { get; set; }
         public List<CartItemDto> CartItemDtos { get; set; }
 
     }
     public class CartItemDto
     {
+        public int Id { get; set; }
+        public string  Image { get; set; }
         public string ProductName { get; set; }
         public int Count { get; set; }
         public int Price { get; set; }

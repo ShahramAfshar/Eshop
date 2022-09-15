@@ -2,6 +2,7 @@
 using EStore.Common;
 using EStore.Common.Dto;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace EStore.Application.Services.Users.Commands.LoginUser
@@ -68,10 +69,10 @@ namespace EStore.Application.Services.Users.Commands.LoginUser
                 };
             }
 
-            var role = "";
+            List<string> roles =  new List<string>();
             foreach (var item in user.UserInRoles)
             {
-                role += $"{item.Role.Name}";
+                roles.Add(item.Role.Name);
             }
 
             return new ResultDto<ResultUserloginDto>()
@@ -81,7 +82,7 @@ namespace EStore.Application.Services.Users.Commands.LoginUser
                 Message = "ورود به سایت با موفقیت انجام شد",
                 Data = new ResultUserloginDto()
                 {
-                    Roles=role,
+                    Roles=roles,
                     Name=user.FullName,
                     UserId=user.Id
                 }

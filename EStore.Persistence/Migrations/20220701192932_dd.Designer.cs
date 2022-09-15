@@ -4,14 +4,16 @@ using EStore.Persistence.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EStore.Persistence.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    partial class DataBaseContextModelSnapshot : ModelSnapshot
+    [Migration("20220701192932_dd")]
+    partial class dd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -94,53 +96,6 @@ namespace EStore.Persistence.Migrations
                     b.ToTable("CartItems");
                 });
 
-            modelBuilder.Entity("EStore.Domain.Entities.Finance.RequestPay", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Amount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Authority")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("Guid")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("InsertTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsPay")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsRemove")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("PayDateTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long>("RefId")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("RemoveTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("UpdateTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("RequestPays");
-                });
-
             modelBuilder.Entity("EStore.Domain.Entities.HomePages.HomePageImages", b =>
                 {
                     b.Property<int>("Id")
@@ -202,86 +157,6 @@ namespace EStore.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Sliders");
-                });
-
-            modelBuilder.Entity("EStore.Domain.Entities.Orders.Order", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("InsertTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsRemove")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("OrderState")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("RemoveTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("RequestPayId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("UpdateTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RequestPayId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Orders");
-                });
-
-            modelBuilder.Entity("EStore.Domain.Entities.Orders.OrderDetail", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Count")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("InsertTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsRemove")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Price")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("RemoveTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("UpdateTime")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OrderId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("OrderDetails");
                 });
 
             modelBuilder.Entity("EStore.Domain.Entities.Products.Category", b =>
@@ -463,7 +338,7 @@ namespace EStore.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            InsertTime = new DateTime(2022, 9, 15, 17, 41, 13, 221, DateTimeKind.Local).AddTicks(5445),
+                            InsertTime = new DateTime(2022, 7, 1, 23, 59, 28, 47, DateTimeKind.Local).AddTicks(6930),
                             IsRemove = false,
                             Name = "Admin",
                             RemoveTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -471,7 +346,7 @@ namespace EStore.Persistence.Migrations
                         new
                         {
                             Id = 2,
-                            InsertTime = new DateTime(2022, 9, 15, 17, 41, 13, 245, DateTimeKind.Local).AddTicks(1631),
+                            InsertTime = new DateTime(2022, 7, 1, 23, 59, 28, 69, DateTimeKind.Local).AddTicks(2081),
                             IsRemove = false,
                             Name = "Operator",
                             RemoveTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -479,7 +354,7 @@ namespace EStore.Persistence.Migrations
                         new
                         {
                             Id = 3,
-                            InsertTime = new DateTime(2022, 9, 15, 17, 41, 13, 245, DateTimeKind.Local).AddTicks(2851),
+                            InsertTime = new DateTime(2022, 7, 1, 23, 59, 28, 69, DateTimeKind.Local).AddTicks(3101),
                             IsRemove = false,
                             Name = "Customer",
                             RemoveTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -588,55 +463,6 @@ namespace EStore.Persistence.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("EStore.Domain.Entities.Finance.RequestPay", b =>
-                {
-                    b.HasOne("EStore.Domain.Entities.Users.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("EStore.Domain.Entities.Orders.Order", b =>
-                {
-                    b.HasOne("EStore.Domain.Entities.Finance.RequestPay", "RequestPay")
-                        .WithMany("Orders")
-                        .HasForeignKey("RequestPayId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EStore.Domain.Entities.Users.User", "User")
-                        .WithMany("Orders")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("RequestPay");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("EStore.Domain.Entities.Orders.OrderDetail", b =>
-                {
-                    b.HasOne("EStore.Domain.Entities.Orders.Order", "Order")
-                        .WithMany()
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EStore.Domain.Entities.Products.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Order");
-
-                    b.Navigation("Product");
-                });
-
             modelBuilder.Entity("EStore.Domain.Entities.Products.Category", b =>
                 {
                     b.HasOne("EStore.Domain.Entities.Products.Category", "ParentCategory")
@@ -703,11 +529,6 @@ namespace EStore.Persistence.Migrations
                     b.Navigation("CartItem");
                 });
 
-            modelBuilder.Entity("EStore.Domain.Entities.Finance.RequestPay", b =>
-                {
-                    b.Navigation("Orders");
-                });
-
             modelBuilder.Entity("EStore.Domain.Entities.Products.Category", b =>
                 {
                     b.Navigation("SubCategory");
@@ -727,8 +548,6 @@ namespace EStore.Persistence.Migrations
 
             modelBuilder.Entity("EStore.Domain.Entities.Users.User", b =>
                 {
-                    b.Navigation("Orders");
-
                     b.Navigation("UserInRoles");
                 });
 #pragma warning restore 612, 618

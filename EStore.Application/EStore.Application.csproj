@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <Folder Include="Services\Common\Commands\" />
+    <Folder Include="Services\Order\Queries\" />
   </ItemGroup>
 
 </Project>

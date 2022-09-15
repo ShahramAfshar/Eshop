@@ -1,11 +1,15 @@
 ﻿using EStore.Application.Interfaces.Contexts;
 using EStore.Application.Interfaces.FacadPatern;
+using EStore.Application.Services.Carts;
 using EStore.Application.Services.Common.Queries.GetCategory;
 using EStore.Application.Services.Common.Queries.GetMenuItem;
+using EStore.Application.Services.Finance.Commands.AddRequestPay;
+using EStore.Application.Services.Finance.Queries.GetRequestPay;
 using EStore.Application.Services.HomePages.Commands.AddNewHomePageImage;
 using EStore.Application.Services.HomePages.Commands.AddNewSlider;
 using EStore.Application.Services.HomePages.Queries.GetHomePageImage;
 using EStore.Application.Services.HomePages.Queries.GetSlider;
+using EStore.Application.Services.Order.Commands.AddNewOrder;
 using EStore.Application.Services.Products.FacadPatern;
 using EStore.Application.Services.Users.Commands.EditUser;
 using EStore.Application.Services.Users.Commands.LoginUser;
@@ -14,6 +18,7 @@ using EStore.Application.Services.Users.Commands.RemoveUser;
 using EStore.Application.Services.Users.Commands.UserStatusChange;
 using EStore.Application.Services.Users.Queries.GetRoles;
 using EStore.Application.Services.Users.Queries.GetUsers;
+using EStore.Common.UserRoles;
 using EStore.Persistence.Contexts;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
@@ -42,6 +47,16 @@ namespace EndPoint.Site
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //برای رول ها
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy(UserRoles.Admin, policy => policy.RequireRole(UserRoles.Admin));
+                options.AddPolicy(UserRoles.Customer, policy => policy.RequireRole(UserRoles.Customer));
+                options.AddPolicy(UserRoles.Operator, policy => policy.RequireRole(UserRoles.Operator));
+
+            });
+
+
             //برای انجام Authentication بر اساس کوکی
             services.AddAuthentication(options =>
             {
@@ -50,7 +65,7 @@ namespace EndPoint.Site
                 options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             }).AddCookie(options =>
             {
-                options.LoginPath = new PathString("/");
+                options.LoginPath = new PathString("/Authentication/Signin");
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(5.0);
             });
 
@@ -73,7 +88,13 @@ namespace EndPoint.Site
             services.AddScoped<IGetSliderService, GetSliderService>();
             services.AddScoped<IAddNewHomePageImageService, AddNewHomePageImageService>();
             services.AddScoped<IGetHomePageImageService, GetHomePageImageService>();
+            services.AddScoped<ICartService, CartService>();
+            services.AddScoped<IAddRequestPayService, AddRequestPayService>();
+            services.AddScoped<IGetRequestPayService, GetRequestPayService>();
+            services.AddScoped<IAddNewOrderService, AddNewOrderService>();
             
+
+
 
             string connectionString = @"Data Source=SHAHRAM-PC\SQLEXPRESS ; Initial Catalog= bugetoShop; Integrated Security=True";
             services.AddEntityFrameworkSqlServer().AddDbContext<DataBaseContext>(options=>options.UseSqlServer(connectionString));
@@ -95,8 +116,8 @@ namespace EndPoint.Site
 
             app.UseRouting();
 
-            app.UseAuthorization();
             app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
