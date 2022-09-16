@@ -4,6 +4,7 @@ using EStore.Domain.Entities.Products;
 using EStore.Domain.Entities.Users;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +21,9 @@ namespace EStore.Domain.Entities.Orders
 
         public OrderState OrderState { get; set; }
         public string Address { get; set; }
+
+
+        public virtual ICollection<OrderDetail> OrderDetails{get; set;}
     }
 
     public class OrderDetail : BaseEntity
@@ -38,8 +42,13 @@ namespace EStore.Domain.Entities.Orders
 
     public enum OrderState
     {
+        [Display(Name="درحال پردازش")]
         Processing=0,
+
+        [Display(Name = "لغو سفارش")]
         Canceled =1 ,
-        Deliverd=2
+
+        [Display(Name = "تحویل سفارش")]
+        Deliverd =2
     }
 }

@@ -32,6 +32,8 @@ namespace EStore.Application.Services.Order.Commands.AddNewOrder
 
             requestPay.IsPay = true;
             requestPay.PayDateTime = DateTime.Now;
+            requestPay.RefId = request.RefId;
+            requestPay.Authority = request.Authority;
 
             cart.Finished = true;
 
@@ -77,6 +79,8 @@ namespace EStore.Application.Services.Order.Commands.AddNewOrder
         public int CartId { get; set; }
         public int RequestPayId { get; set; }
         public int UserId { get; set; }
+        public string Authority { get; set; }
+        public long RefId { get; set; } = 0;
 
     }
 }

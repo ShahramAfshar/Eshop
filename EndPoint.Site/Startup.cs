@@ -5,11 +5,14 @@ using EStore.Application.Services.Common.Queries.GetCategory;
 using EStore.Application.Services.Common.Queries.GetMenuItem;
 using EStore.Application.Services.Finance.Commands.AddRequestPay;
 using EStore.Application.Services.Finance.Queries.GetRequestPay;
+using EStore.Application.Services.Finance.Queries.GetRequestPayForAdmin;
 using EStore.Application.Services.HomePages.Commands.AddNewHomePageImage;
 using EStore.Application.Services.HomePages.Commands.AddNewSlider;
 using EStore.Application.Services.HomePages.Queries.GetHomePageImage;
 using EStore.Application.Services.HomePages.Queries.GetSlider;
 using EStore.Application.Services.Order.Commands.AddNewOrder;
+using EStore.Application.Services.Order.Queries.GetOrdersForAdmin;
+using EStore.Application.Services.Order.Queries.GetUserOrders;
 using EStore.Application.Services.Products.FacadPatern;
 using EStore.Application.Services.Users.Commands.EditUser;
 using EStore.Application.Services.Users.Commands.LoginUser;
@@ -67,6 +70,7 @@ namespace EndPoint.Site
             {
                 options.LoginPath = new PathString("/Authentication/Signin");
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(5.0);
+                options.AccessDeniedPath = new PathString("");
             });
 
             services.AddScoped<IDataBaseContext, DataBaseContext>();
@@ -92,6 +96,9 @@ namespace EndPoint.Site
             services.AddScoped<IAddRequestPayService, AddRequestPayService>();
             services.AddScoped<IGetRequestPayService, GetRequestPayService>();
             services.AddScoped<IAddNewOrderService, AddNewOrderService>();
+            services.AddScoped<IGetUserOrdersService, GetUserOrdersService>();
+            services.AddScoped<IGetOrdersForAdminService, GetOrdersForAdminService>();
+            services.AddScoped<IGetRequestPayForAdminService, GetRequestPayForAdminService>();
             
 
 

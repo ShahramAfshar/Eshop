@@ -32,5 +32,48 @@ namespace EndPoint.Site.Utilities
             }
 
         }
+
+
+        public static string GetEmail(ClaimsPrincipal User)
+        {
+            try
+            {
+                var claimsIdentity = User.Identity as ClaimsIdentity;
+
+                return claimsIdentity.FindFirst(ClaimTypes.Email).Value;
+                
+      
+
+            }
+            catch (Exception)
+            {
+
+                return null;
+            }
+
+        }
+
+        public static List<string> GetRoles(ClaimsPrincipal user)
+        {
+
+            try
+            {
+                var claimIdentity = user.Identity as ClaimsIdentity;
+                List<string> roles = new List<string>();
+
+                foreach (var item in claimIdentity.Claims.Where(p=>p.Type.EndsWith("role")))
+                {
+                    roles.Add(item.Value);
+                }
+
+                return roles;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

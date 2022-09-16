@@ -1,4 +1,5 @@
 ﻿using EStore.Application.Services.HomePages.Commands.AddNewSlider;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 namespace EndPoint.Site.Areas.Admin.Controllers
 {
     [Area("Admin")]
+   // [Authorize(Roles ="Admin,User")]
     public class SlidersController : Controller
     {
         private IAddNewSliderSevice _addNewSliderSevice;
